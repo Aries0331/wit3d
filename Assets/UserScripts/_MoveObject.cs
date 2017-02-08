@@ -23,17 +23,21 @@ public partial class Wit3D : MonoBehaviour {
 		// Find the objects
 		GameObject subject = GameObject.Find(subjJson);
 		GameObject destination = GameObject.Find(destJson);
+		
+		// In case of Non-Object Error
+		if (subject != null && destination != null) {
+		
+			// Find object's positions
+			Vector3 subjectLoc = subject.transform.localPosition;
+			string subjectLocDebug = subject.transform.localPosition.ToString ();
+			print ("SubjectLoc: " + subjectLoc);
 
-		// Find object's positions
-		Vector3 subjectLoc = subject.transform.localPosition;
-		string subjectLocDebug = subject.transform.localPosition.ToString ();
-		print ("SubjectLoc: " + subjectLoc);
+			Vector3 destLoc = destination.transform.localPosition + new Vector3 (0.0f, (destination.transform.lossyScale.y/2), 0.0f);
+			string destLocDebug = destination.transform.localPosition.ToString ();
 
-		Vector3 destLoc = destination.transform.localPosition + new Vector3 (0.0f, (destination.transform.lossyScale.y/2), 0.0f);
-		string destLocDebug = destination.transform.localPosition.ToString ();
-
-		// Now move the object
-		StartCoroutine (MoveToPosition (subject, destLoc, moveTime));
+			// Now move the object
+			StartCoroutine (MoveToPosition (subject, destLoc, moveTime));
+		}
 
 	}
 
